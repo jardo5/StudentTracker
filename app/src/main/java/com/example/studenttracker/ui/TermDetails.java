@@ -1,13 +1,10 @@
-package com.example.studenttracker.utility;
+package com.example.studenttracker.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import com.example.studenttracker.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class TermDetails extends AppCompatActivity {
 

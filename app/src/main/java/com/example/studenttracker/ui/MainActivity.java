@@ -1,4 +1,4 @@
-package com.example.studenttracker.utility;
+package com.example.studenttracker.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 

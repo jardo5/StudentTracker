@@ -13,22 +13,22 @@
         android:theme="@style/Theme.StudentTracker"
         tools:targetApi="31">
         <activity
-            android:name=".utility.ClassDetails"
+            android:name=".ui.ClassDetails"
             android:exported="false"
-            android:parentActivityName=".utility.TermDetails"
+            android:parentActivityName=".ui.TermDetails"
             android:label="Classes"/>
         <activity
-            android:name=".utility.TermDetails"
+            android:name=".ui.TermDetails"
             android:exported="false"
             android:label="Term Details and Class List"
-            android:parentActivityName=".utility.TermList" />
+            android:parentActivityName=".ui.TermList" />
         <activity
-            android:name=".utility.TermList"
+            android:name=".ui.TermList"
             android:exported="false"
             android:label="Terms"
-            android:parentActivityName=".utility.MainActivity" />
+            android:parentActivityName=".ui.MainActivity" />
         <activity
-            android:name=".utility.MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true"
             android:label="Main">
             <intent-filter>
