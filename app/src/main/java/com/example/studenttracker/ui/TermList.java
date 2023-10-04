@@ -38,14 +38,18 @@ private Repository repository;
         return true;
     }
 
-    public boolean onOptionsItemSelect(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item){
         if(item.getItemId()==R.id.mysample){
             repository = new Repository(getApplication());
             //Toast.makeText(TermList.this, "put in sample data", Toast.LENGTH_LONG).show();
             Term term = new Term(1, "First Term", "01/1/23", "12/31/23");
+            Term term2 = new Term(1, "Second Term", "01/1/23", "12/31/23");
             repository.insert(term);
+            repository.insert(term2);
             Classes classes = new Classes(1, "Math Classes", "01/1/23", "12/31/23", "Almost Done", "Jane Doe", "1234567890", "test@test.org", 1, "Note Example" );
-            repository.insert(classes.getClass());
+            Classes classes2 = new Classes(2, "Math Classes", "01/1/23", "12/31/23", "Almost Done", "Jane Doe", "1234567890", "test@test.org", 2, "Note Example" );
+            repository.insert(classes);
+            repository.insert(classes2);
             return true;
         }
         if(item.getItemId()==android.R.id.home){

@@ -22,7 +22,7 @@ public class Repository {
     private List<Term> mAllTerms;
     private List<Assessment> mAllAssessments;
 
-    private List<Class> mGetAllAssociatedClasses;
+    private List<Classes> mGetAllAssociatedClasses;
 
     private static int NUMBER_OF_THREADS = 4;
     static final ExecutorService databaseExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
@@ -35,7 +35,7 @@ public class Repository {
     }
 
     //Associated Classes
-    public List<Class> getAllAssociatedClasses(int termID){
+    public List<Classes> getAllAssociatedClasses(int termID){
         databaseExecutor.execute(() -> {
             mGetAllAssociatedClasses = mClassesDAO.getAllAssociatedClasses(termID);
         });
@@ -55,17 +55,17 @@ public class Repository {
         }
         return mAllClasses;
     }
-    public void delete(Class classes) {
+    public void delete(Classes classes) {
         databaseExecutor.execute(() -> {
             mClassesDAO.delete(classes);
         });
     }
-    public void insert(Class classes) {
+    public void insert(Classes classes) {
         databaseExecutor.execute(() -> {
             mClassesDAO.insert(classes);
         });
     }
-    public void update(Class classes) {
+    public void update(Classes classes) {
         databaseExecutor.execute(() -> {
             mClassesDAO.update(classes);
         });
