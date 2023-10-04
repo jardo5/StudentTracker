@@ -3,7 +3,7 @@ package com.example.studenttracker.entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "assessment")
+@Entity(tableName = "assessments")
 public class Assessment {
 
     @PrimaryKey(autoGenerate = true)

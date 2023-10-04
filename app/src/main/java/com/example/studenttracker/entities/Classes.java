@@ -3,17 +3,17 @@ package com.example.studenttracker.entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "class")
-public class Class {
+@Entity(tableName = "classes")
+public class Classes {
     @PrimaryKey(autoGenerate = true)
     private int classID;
     private String classTitle;
     private String classStart;
     private String classEnd;
     private String classProgress;
-    private String classProfName;
-    private String classProfPhone;
-    private String classProfEmail;
+    private String classInstructorName;
+    private String classInstructorPhone;
+    private String classInstructorEmail;
     private int termID;
 
     public String getClassNotes() {
@@ -26,20 +26,20 @@ public class Class {
 
     private String classNotes;
 
-    public Class(int classID, String classTitle, String classStart, String classEnd, String classProgress, String classProfName, String classProfPhone, String classProfEmail, int termID, String classNotes) {
+    public Classes(int classID, String classTitle, String classStart, String classEnd, String classProgress, String classInstructorName, String classInstructorPhone, String classInstructorEmail, int termID, String classNotes) {
         this.classID = classID;
         this.classTitle = classTitle;
         this.classStart = classStart;
         this.classEnd = classEnd;
         this.classProgress = classProgress;
-        this.classProfName = classProfName;
-        this.classProfPhone = classProfPhone;
-        this.classProfEmail = classProfEmail;
+        this.classInstructorName = classInstructorName;
+        this.classInstructorPhone = classInstructorPhone;
+        this.classInstructorEmail = classInstructorEmail;
         this.termID = termID;
         this.classNotes = classNotes;
     }
 
-    public Class() {
+    public Classes() {
     }
 
     public int getClassID() {
@@ -82,28 +82,28 @@ public class Class {
         this.classProgress = classProgress;
     }
 
-    public String getClassProfName() {
-        return classProfName;
+    public String getClassInstructorName() {
+        return classInstructorName;
     }
 
-    public void setClassProfName(String classProfName) {
-        this.classProfName = classProfName;
+    public void setClassInstructorName(String classInstructorName) {
+        this.classInstructorName = classInstructorName;
     }
 
-    public String getClassProfPhone() {
-        return classProfPhone;
+    public String getClassInstructorPhone() {
+        return classInstructorPhone;
     }
 
-    public void setClassProfPhone(String classProfPhone) {
-        this.classProfPhone = classProfPhone;
+    public void setClassInstructorPhone(String classInstructorPhone) {
+        this.classInstructorPhone = classInstructorPhone;
     }
 
-    public String getClassProfEmail() {
-        return classProfEmail;
+    public String getClassInstructorEmail() {
+        return classInstructorEmail;
     }
 
-    public void setClassProfEmail(String classProfEmail) {
-        this.classProfEmail = classProfEmail;
+    public void setClassInstructorEmail(String classInstructorEmail) {
+        this.classInstructorEmail = classInstructorEmail;
     }
 
     public int getTermID() {
