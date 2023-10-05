@@ -16,10 +16,13 @@ import java.util.List;
 public interface ClassesDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Classes classes);
+
     @Update
     void update(Classes classes);
+
     @Delete
     void delete(Classes classes);
+
     @Query("SELECT * FROM classes ORDER BY classID ASC")
     List<Classes> getAllClasses();
 

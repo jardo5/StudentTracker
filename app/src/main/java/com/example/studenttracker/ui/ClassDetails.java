@@ -15,11 +15,11 @@ public class ClassDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_details);
-        FloatingActionButton fab=findViewById(R.id.floatingActionButton2);
-        fab.setOnClickListener(new View.OnClickListener(){
+        FloatingActionButton fab = findViewById(R.id.floatingActionButton2);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick (View view) {
-                Intent intent=new Intent(ClassDetails.this, TermDetails.class);
+            public void onClick(View view) {
+                Intent intent = new Intent(ClassDetails.this, TermDetails.class);
                 startActivity(intent);
             }
         });

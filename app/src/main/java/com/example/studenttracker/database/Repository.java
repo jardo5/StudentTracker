@@ -35,7 +35,7 @@ public class Repository {
     }
 
     //Associated Classes
-    public List<Classes> getAllAssociatedClasses(int termID){
+    public List<Classes> getAllAssociatedClasses(int termID) {
         databaseExecutor.execute(() -> {
             mGetAllAssociatedClasses = mClassesDAO.getAllAssociatedClasses(termID);
         });
@@ -55,22 +55,24 @@ public class Repository {
         }
         return mAllClasses;
     }
+
     public void delete(Classes classes) {
         databaseExecutor.execute(() -> {
             mClassesDAO.delete(classes);
         });
     }
+
     public void insert(Classes classes) {
         databaseExecutor.execute(() -> {
             mClassesDAO.insert(classes);
         });
     }
+
     public void update(Classes classes) {
         databaseExecutor.execute(() -> {
             mClassesDAO.update(classes);
         });
     }
-
 
 
     //Terms
@@ -85,16 +87,19 @@ public class Repository {
         }
         return mAllTerms;
     }
+
     public void delete(Term term) {
         databaseExecutor.execute(() -> {
             mTermDAO.delete(term);
         });
     }
+
     public void insert(Term term) {
         databaseExecutor.execute(() -> {
             mTermDAO.insert(term);
         });
     }
+
     public void update(Term term) {
         databaseExecutor.execute(() -> {
             mTermDAO.update(term);
@@ -114,16 +119,19 @@ public class Repository {
         }
         return mAllAssessments;
     }
+
     public void delete(Assessment assessments) {
         databaseExecutor.execute(() -> {
             mAssessmentDAO.delete(assessments);
         });
     }
+
     public void insert(Assessment assessments) {
         databaseExecutor.execute(() -> {
             mAssessmentDAO.insert(assessments);
         });
     }
+
     public void update(Assessment assessments) {
         databaseExecutor.execute(() -> {
             mAssessmentDAO.update(assessments);

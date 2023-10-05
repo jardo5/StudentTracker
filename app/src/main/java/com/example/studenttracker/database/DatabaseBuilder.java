@@ -12,7 +12,7 @@ import com.example.studenttracker.entities.Assessment;
 import com.example.studenttracker.entities.Classes;
 import com.example.studenttracker.entities.Term;
 
-@androidx.room.Database(entities = {Term.class, Classes.class, Assessment.class}, version = 1, exportSchema = false)
+@androidx.room.Database(entities = {Term.class, Classes.class, Assessment.class}, version = 2, exportSchema = false)
 public abstract class DatabaseBuilder extends RoomDatabase {
     public abstract TermDAO termDAO();
 
