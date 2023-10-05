@@ -43,7 +43,6 @@ public class TermList extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.mysample) {
             repository = new Repository(getApplication());
-            //Toast.makeText(TermList.this, "put in sample data", Toast.LENGTH_LONG).show();
             Term term = new Term(1, "First Term", "01/1/23", "12/31/23");
             repository.insert(term);
             Term term2 = new Term(2, "Second Term", "01/1/23", "12/31/23");
