@@ -1,12 +1,16 @@
 package com.example.studenttracker.ui;
+
 import com.example.studenttracker.utils.DateUtil;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -18,9 +22,11 @@ import com.example.studenttracker.entities.Classes;
 import com.example.studenttracker.entities.Term;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -39,8 +45,8 @@ public class TermDetails extends AppCompatActivity {
     // For date picker
     String termStartDate;
     String termEndDate;
-    DatePickerDialog.OnDateSetListener termDate;
-    DatePickerDialog.OnDateSetListener termDateEnd;
+    DatePickerDialog.OnDateSetListener termDates;
+    DatePickerDialog.OnDateSetListener termDatesEnd;
 
     // For Start & End Dates
     final Calendar currentCalendar = Calendar.getInstance();
@@ -53,6 +59,11 @@ public class TermDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_details);
 
+        RecyclerView rV = findViewById(R.id.classRecyclerView);
+        repo = new Repository(getApplication());
+        final ClassAdapter classAdapter = new ClassAdapter(this);
+        rV.setAdapter(classAdapter);
+        rV.setLayoutManager(new LinearLayoutManager(this));
 
         termTitle = findViewById(R.id.editTermName);
         termTitleString = getIntent().getStringExtra("termTitle");
@@ -78,20 +89,100 @@ public class TermDetails extends AppCompatActivity {
             if (c.getTermID() == termID) filteredClasses.add(c);
         }
 
+        classAdapter.setClasses(filteredClasses);
 
+        startDate.setText(termID < 0 ? currentDate : termStartDate);
+        endDate.setText(termID < 0 ? currentDate : termEndDate);
 
+        startDate.setOnClickListener(view -> {
+            String stringFromButton = endDate.getText().toString();
+            try {
+                Date date = DateUtil.convertStringToDate(stringFromButton);
+                currentCalendar2.setTime(date);
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+            new DatePickerDialog(TermDetails.this, termDates, currentCalendar2.get(Calendar.YEAR), currentCalendar2.get(Calendar.MONTH), currentCalendar2.get(Calendar.DAY_OF_MONTH)).show();
+        });
 
+        endDate.setOnClickListener(view -> {
+            String stringFromButton = endDate.getText().toString();
+            try {
+                Date date = DateUtil.convertStringToDate(stringFromButton);
+                currentCalendar2.setTime(date);
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+            new DatePickerDialog(TermDetails.this, termDatesEnd, currentCalendar2.get(Calendar.YEAR), currentCalendar2.get(Calendar.MONTH), currentCalendar2.get(Calendar.DAY_OF_MONTH)).show();
+        });
 
+        termDates = (view, year, month, dayOfMonth) -> {
+            currentCalendar.set(Calendar.YEAR, year);
+            currentCalendar.set(Calendar.MONTH, month);
+            currentCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            startDate.setText(DateUtil.convertDateToString(currentCalendar.getTime()));
+        };
 
+        termDatesEnd = (view, year, month, dayOfMonth) -> {
+            currentCalendar2.set(Calendar.YEAR, year);
+            currentCalendar2.set(Calendar.MONTH, month);
+            currentCalendar2.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            endDate.setText(DateUtil.convertDateToString(currentCalendar2.getTime()));
+        };
 
+        button.setOnClickListener(v -> {
+            termStartDate = startDate.getText().toString();
+            termEndDate = endDate.getText().toString();
+            String title = termTitle.getText().toString();
 
+            if (termID < 0) {
+                term = new Term(0, title, termStartDate, termEndDate);
+                repo.insert(term);
+            } else {
+                term = new Term(termID, title, termStartDate, termEndDate);
+                repo.update(term);
+            }
 
+            Intent intent = new Intent(TermDetails.this, TermList.class);
+            startActivity(intent);
+        });
 
         FloatingActionButton fab = findViewById(R.id.floatingActionButton2);
-        // Lambda expression because I want to learn how to more effectively use them
         fab.setOnClickListener(view -> {
             Intent intent = new Intent(TermDetails.this, ClassDetails.class);
             startActivity(intent);
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        RecyclerView rV = findViewById(R.id.classRecyclerView);
+        final ClassAdapter classAdapter = new ClassAdapter(this);
+        rV.setAdapter(classAdapter);
+        rV.setLayoutManager(new LinearLayoutManager(this));
+
+        List<Classes> filteredClasses = new ArrayList<>();
+        for (Classes c : repo.getAllClasses()) {
+            if (c.getTermID() == termID) filteredClasses.add(c);
+        }
+
+        classAdapter.setClasses(filteredClasses);
+    }
+
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_term_details, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        int itemId = item.getItemId();
+        if (itemId == android.R.id.home) {
+            this.finish();
+            return true;
+        } else if {
+            //to do add new menu options for terms/classes/assessments
+            }
+        }
     }
 }
