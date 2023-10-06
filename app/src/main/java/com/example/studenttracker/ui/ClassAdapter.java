@@ -19,6 +19,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
 
     class ClassViewHolder extends RecyclerView.ViewHolder {
         private final TextView classItemView;
+
         private ClassViewHolder(View itemView) {
             super(itemView);
             classItemView = itemView.findViewById(R.id.classNameTextView);
@@ -50,10 +51,11 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
 
     private final LayoutInflater mInflater;
 
-    public ClassAdapter(Context context){
+    public ClassAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
         this.context = context;
     }
+
     private List<Classes> mClasses;
 
 
@@ -66,7 +68,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
 
     @Override
     public void onBindViewHolder(@NonNull ClassAdapter.ClassViewHolder holder, int position) {
-        if(mClasses != null){
+        if (mClasses != null) {
             Classes currentClass = mClasses.get(position);
             String title = currentClass.getClassTitle();
             holder.classItemView.setText(title);
@@ -75,13 +77,14 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
         }
     }
 
-    public void setClasses(List<Classes> classes){
+    public void setClasses(List<Classes> classes) {
         mClasses = classes;
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return mClasses.size();
+        //NullPointerException error if empty fix
+        return mClasses != null ? mClasses.size() : 0;
     }
 }
