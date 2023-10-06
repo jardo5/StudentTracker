@@ -15,8 +15,13 @@
         <activity
             android:name=".ui.ClassDetails"
             android:exported="false"
-            android:parentActivityName=".ui.TermDetails"
-            android:label="Classes"/>
+            android:label="Classes and Assessments"
+            android:parentActivityName=".ui.TermDetails" />
+        <activity
+            android:name=".ui.AssessmentDetails"
+            android:exported="false"
+            android:label="Assessment Details"
+            android:parentActivityName=".ui.ClassDetails" />
         <activity
             android:name=".ui.TermDetails"
             android:exported="false"
