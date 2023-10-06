@@ -1,6 +1,7 @@
 package com.example.studenttracker.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -15,6 +16,8 @@ import com.example.studenttracker.entities.Classes;
 import com.example.studenttracker.entities.Term;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.List;
+
 public class TermList extends AppCompatActivity {
     private Repository repository;
 
@@ -24,10 +27,13 @@ public class TermList extends AppCompatActivity {
         setContentView(R.layout.activity_term_list);
 
         //Retrieve & Display Terms Using RecyclerView
-        RecyclerView rV = findViewById(R.id.termrecyclerview);
-
-
-
+        RecyclerView rV = findViewById(R.id.termrecyclerview); //rV = RecyclerView
+        final TermAdapter termAdapter = new TermAdapter(this);
+        rV.setAdapter(termAdapter);
+        rV.setLayoutManager(new LinearLayoutManager(this));
+        repository = new Repository(getApplication());
+        List<Term> allTerms = repository.getAllTerms();
+        termAdapter.setTerm(allTerms);
 
 
         //Advance to Term Details
@@ -68,5 +74,16 @@ public class TermList extends AppCompatActivity {
             return true;
         }
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        List<Term> allTerm = repository.getAllTerms();
+        RecyclerView rV = findViewById(R.id.termrecyclerview);
+        final TermAdapter termAdapter = new TermAdapter(this);
+        rV.setAdapter(termAdapter);
+        rV.setLayoutManager(new LinearLayoutManager(this));
+        termAdapter.setTerm(allTerm);
     }
 }
