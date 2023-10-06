@@ -20,7 +20,7 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
 
         private TermViewHolder(View itemview){
             super(itemview);
-            termItemView=itemview.findViewById(R.id.textView2);
+            termItemView=itemview.findViewById(R.id.termNameTextView);
             itemview.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
