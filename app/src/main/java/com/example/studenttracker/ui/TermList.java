@@ -1,6 +1,7 @@
 package com.example.studenttracker.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +22,15 @@ public class TermList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_list);
+
+        //Retrieve & Display Terms Using RecyclerView
+        RecyclerView rV = findViewById(R.id.termrecyclerview);
+
+
+
+
+
+        //Advance to Term Details
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
