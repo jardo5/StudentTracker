@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.studenttracker.R;
 import com.example.studenttracker.database.Repository;
@@ -175,14 +176,30 @@ public class TermDetails extends AppCompatActivity {
         return true;
     }
 
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
         if (itemId == android.R.id.home) {
             this.finish();
             return true;
-        } else if {
-            //to do add new menu options for terms/classes/assessments
+        } else if (itemId == R.id.deleteTermSelect) {
+            for (Term t : repo.getAllTerms()) {
+                if (t.getTermID() == termID) {
+                    currentTerm = t;
+                }
             }
+            int associatedClasses = 0;
+            for (Classes c : repo.getAllClasses()) {
+                if (c.getTermID() == termID) {
+                    associatedClasses++;
+                }
+            }
+            if (associatedClasses == 0) {
+                repo.delete(currentTerm);
+            } else {
+                Toast.makeText(getApplicationContext(), "Cannot delete a term with associated classes", Toast.LENGTH_LONG).show();
+            }
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 }
