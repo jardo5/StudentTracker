@@ -57,35 +57,12 @@ public class TermList extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.mysample) {
-            repository = new Repository(getApplication());
-            Term term = new Term(1, "First Term", "01/1/23", "12/31/23");
-            repository.insert(term);
-            Term term2 = new Term(2, "Second Term", "01/1/23", "12/31/23");
-            repository.insert(term2);
-            Term term3 = new Term(3, "Third Term", "01/1/23", "12/31/23");
-            repository.insert(term3);
-            Term term4 = new Term(4, "Fourth Term", "01/1/23", "12/31/23");
-            repository.insert(term4);
-
-
-
-            Classes classes = new Classes(1, "Math Classes", "01/1/23", "12/31/23", "Almost Done", "Jane Doe", "1234567890", "test@test.org", 1, "Note Example");
-            repository.insert(classes);
-            Classes classes2 = new Classes(2, "Science Classes", "01/2/23", "12/30/23", "Almost Done", "Jane Doe", "1234567890", "test@test.org", 2, "Note Example");
-            repository.insert(classes2);
-            Classes classes3 = new Classes(3, "English Classes", "01/3/23", "12/29/23", "Almost Done", "Jane Doe", "1234567890", "test@test.org" , 3, "Note Example");
-            repository.insert(classes3);
-            Classes classes4 = new Classes(4, "History Classes", "01/4/23", "12/28/23", "Almost Done", "Jane Doe", "1234567890", "test@test.org", 4, "Note Example");
-            repository.insert(classes4);
-
-            return true;
-        }
-        if (item.getItemId() == android.R.id.home) {
+        int id = item.getItemId();
+        if (id == android.R.id.home){
             this.finish();
             return true;
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

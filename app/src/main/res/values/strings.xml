@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">StudentTracker</string>
+    <string name="delete_term">Delete Term</string>
 </resources>
