@@ -172,7 +172,7 @@ public class TermDetails extends AppCompatActivity {
     }
 
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_term_details, menu);
+        getMenuInflater().inflate(R.menu.term_details_menu, menu);
         return true;
     }
 

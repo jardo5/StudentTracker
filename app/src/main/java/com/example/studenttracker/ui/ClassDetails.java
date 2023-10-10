@@ -24,6 +24,7 @@ import com.example.studenttracker.entities.Classes;
 import com.example.studenttracker.utils.DateUtil;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -229,62 +230,68 @@ public class ClassDetails extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item){
         int itemID = item.getItemId();
-        if (itemID == android.R.id.home){
-            this.finish();
+
+        if (itemID == android.R.id.home) {
+            finish();
             return true;
-        } else if (itemID == R.id.classShareMenu){
-            Intent sendIntent = new Intent();
-            sendIntent.setAction(Intent.ACTION_SEND);
-            sendIntent.putExtra(Intent.EXTRA_TEXT, classNoteEdit.getText().toString());
-            sendIntent.setType("text/plain");
-            Intent shareIntent = Intent.createChooser(sendIntent, null);
-            startActivity(shareIntent);
+        }
+
+        if (itemID == R.id.classShareMenu) {
+            shareClassNote();
             return true;
-        } else if (itemID == R.id.classDeleteMenu) {
-            for (Classes classes : repo.getAllClasses()){
-                if (classes.getClassID() == classID){
-                    Classes classTemp = classes;
-                    repo.delete(classTemp);
-                }
+        }
+
+        if (itemID == R.id.classDeleteMenu) {
+            deleteClass();
+            return true;
+        }
+
+        if (itemID == R.id.classStartMenu) {
+            setNotification(classStart, "Class " + classTitle + " starts today!");
+            return true;
+        }
+
+        if (itemID == R.id.classEndMenu) {
+            setNotification(classEnd, "Class " + classTitle + " ends today!");
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void shareClassNote() {
+        Intent sendIntent = new Intent(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, classNoteEdit.getText().toString());
+        sendIntent.setType("text/plain");
+        startActivity(Intent.createChooser(sendIntent, null));
+    }
+
+    private void deleteClass() {
+        for (Classes classes : repo.getAllClasses()) {
+            if (classes.getClassID() == classID) {
+                repo.delete(classes);
+                break;
             }
-            return true;
-        } else if (itemID == R.id.classStartMenu) {
-            String formatForDate = "MM/dd/yyyy";
-            SimpleDateFormat dateFormat = new SimpleDateFormat(formatForDate);
-            Date date = null;
-            try{
-                date = dateFormat.parse(classStart);
-            } catch (Exception e){
-                e.printStackTrace();
-            }
-            Long trigger = date.getTime();
-            //TODO Notifcations
-            Intent intent = new Intent(ClassDetails.this, NotificationReceiver.class);
-            intent.putExtra("key", "Class " + classTitle + " starts today!");
-            PendingIntent sender = PendingIntent.getBroadcast(ClassDetails.this, ++MainActivity.alertCount, intent, PendingIntent.FLAG_IMMUTABLE);
-            AlarmManager aM = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-            aM.set(AlarmManager.RTC_WAKEUP, trigger, sender);
-            return true;
-        } else if (itemID == R.id.classEndMenu){
-            String formatForDate = "MM/dd/yyyy";
-            SimpleDateFormat dateFormat = new SimpleDateFormat(formatForDate);
-            Date date = null;
-            try{
-                date = dateFormat.parse(classEnd);
-            } catch (Exception e){
-                e.printStackTrace();
-            }
-            Long trigger = date.getTime();
-            //TODO Notifcations
-            Intent intent = new Intent(ClassDetails.this, NotificationReceiver.class);
-            intent.putExtra("key", "Class " + classTitle + " ends today!");
-            PendingIntent sender = PendingIntent.getBroadcast(ClassDetails.this, ++MainActivity.alertCount, intent, PendingIntent.FLAG_IMMUTABLE);
-            AlarmManager aM = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-            aM.set(AlarmManager.RTC_WAKEUP, trigger, sender);
-            return true;
-        } else {
-            return super.onOptionsItemSelected(item);
         }
     }
+
+    private void setNotification(String classDate, String notificationText) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        Date date;
+        try {
+            date = dateFormat.parse(classDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return;
+        }
+        long trigger = date.getTime();
+
+        Intent intent = new Intent(ClassDetails.this, NotificationReceiver.class);
+        intent.putExtra("key", notificationText);
+        PendingIntent sender = PendingIntent.getBroadcast(ClassDetails.this, ++MainActivity.alertCount, intent, PendingIntent.FLAG_IMMUTABLE);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
+    }
+
 }
 
