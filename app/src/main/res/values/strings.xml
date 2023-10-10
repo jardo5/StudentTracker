@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">StudentTracker</string>
     <string name="delete_term">Delete Term</string>
+    <string name="progress_spinner">ProgressSpinner</string>
+    <string name="delete_class">Delete Class</string>
+    <string name="notify_start">\n</string>
+    <string name="notify_end">Notify End</string>
+    <string name="share">Share</string>
+    <string-array name="class_status">
+        <item>In Progress</item>
+        <item>Completed</item>
+        <item>Dropped</item>
+        <item>Plan to Take</item>
+    </string-array>
 </resources>

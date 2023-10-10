@@ -144,7 +144,7 @@
                     android:text="Professor Name:" />
 
                 <EditText
-                    android:id="@+id/professorNameEditText"
+                    android:id="@+id/profNameEdit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -168,7 +168,7 @@
                     android:text="Professor Email:" />
 
                 <EditText
-                    android:id="@+id/professorEmailEditText"
+                    android:id="@+id/profEmailEdit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -192,7 +192,7 @@
                     android:text="Professor Phone:" />
 
                 <EditText
-                    android:id="@+id/professorPhoneEditText"
+                    android:id="@+id/profPhoneEdit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

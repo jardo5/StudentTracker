@@ -13,6 +13,8 @@ import com.example.studenttracker.entities.Term;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static int alertCount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
