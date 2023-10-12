@@ -286,7 +286,7 @@ public class ClassDetails extends AppCompatActivity {
         }
         long trigger = date.getTime();
 
-        Intent intent = new Intent(ClassDetails.this, NotificationReceiver.class);
+        Intent intent = new Intent(ClassDetails.this, NotifcationReceiver.class);
         intent.putExtra("key", notificationText);
         PendingIntent sender = PendingIntent.getBroadcast(ClassDetails.this, ++MainActivity.alertCount, intent, PendingIntent.FLAG_IMMUTABLE);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);

@@ -52,7 +52,7 @@ public class TermList extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_term_details, menu);
+        getMenuInflater().inflate(R.menu.term_details_menu, menu);
         return true;
     }
 
