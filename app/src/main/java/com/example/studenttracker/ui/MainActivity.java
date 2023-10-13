@@ -35,14 +35,9 @@ public class MainActivity extends AppCompatActivity {
             repo.insert(term);
         }
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, TermList.class);
-                intent.putExtra("test", "this is a test");
-                startActivity(intent);
-            }
-
+        button.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, TermList.class);
+            startActivity(intent);
         });
     }
 }
