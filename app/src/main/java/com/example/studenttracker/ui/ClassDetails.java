@@ -10,6 +10,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -79,13 +80,13 @@ public class ClassDetails extends AppCompatActivity {
         professorName = getIntent().getStringExtra("classProfName");
         professorNameEdit.setText(professorName);
 
-        professorPhoneEdit = findViewById(R.id.profPhoneEdit);
-        professorPhone = getIntent().getStringExtra("classProfPhone");
-        professorPhoneEdit.setText(professorPhone);
-
         professorEmailEdit = findViewById(R.id.profEmailEdit);
         professorEmail = getIntent().getStringExtra("classProfEmail");
         professorEmailEdit.setText(professorEmail);
+
+        professorPhoneEdit = findViewById(R.id.profPhoneEdit);
+        professorPhone = getIntent().getStringExtra("classProfPhone");
+        professorPhoneEdit.setText(professorPhone);
 
         classNoteEdit = findViewById(R.id.notesEditText);
         classNote = getIntent().getStringExtra("notes");
@@ -97,6 +98,8 @@ public class ClassDetails extends AppCompatActivity {
 
         classID = getIntent().getIntExtra("classID", -1);
         termID = getIntent().getIntExtra("termID", -1);
+        Log.d("ClassDetails", "Received termID: " + termID);
+
 
 
         FloatingActionButton fab = findViewById(R.id.floatingActionButton2);
@@ -202,6 +205,7 @@ public class ClassDetails extends AppCompatActivity {
             classStatus = spinner.getSelectedItem().toString();
 
             classes = new Classes(classID < 0 ? 0 : classID, title, classStart, classEnd, classStatus, profName, profPhone, profEmail, termID, note);
+            Log.d("ClassDetails", "Using termID: " + termID + " when saving class");
             if (classID < 0) {
                 repo.insert(classes);
             } else {

@@ -1,6 +1,7 @@
 package com.example.studenttracker.database;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.example.studenttracker.dao.AssessmentDAO;
 import com.example.studenttracker.dao.ClassesDAO;
@@ -43,39 +44,6 @@ public class Repository {
     }
 
 
-    //Classes
-    public List<Classes> getAllClasses() {
-        databaseExecutor.execute(() -> {
-            mAllClasses = mClassesDAO.getAllClasses();
-        });
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        return mAllClasses;
-    }
-
-    public void delete(Classes classes) {
-        databaseExecutor.execute(() -> {
-            mClassesDAO.delete(classes);
-        });
-    }
-
-    public void insert(Classes classes) {
-        databaseExecutor.execute(() -> {
-            mClassesDAO.insert(classes);
-        });
-    }
-
-    public void update(Classes classes) {
-        databaseExecutor.execute(() -> {
-            mClassesDAO.update(classes);
-        });
-    }
-
-
-    //Terms
     public List<Term> getAllTerms() {
         databaseExecutor.execute(() -> {
             mAllTerms = mTermDAO.getAllTerms();
@@ -88,26 +56,18 @@ public class Repository {
         return mAllTerms;
     }
 
-    public void delete(Term term) {
+    public List<Classes> getAllClasses() {
         databaseExecutor.execute(() -> {
-            mTermDAO.delete(term);
+            mAllClasses = mClassesDAO.getAllClasses();
         });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return mAllClasses;
     }
 
-    public void insert(Term term) {
-        databaseExecutor.execute(() -> {
-            mTermDAO.insert(term);
-        });
-    }
-
-    public void update(Term term) {
-        databaseExecutor.execute(() -> {
-            mTermDAO.update(term);
-        });
-    }
-
-
-    //Assessments
     public List<Assessment> getAllAssessments() {
         databaseExecutor.execute(() -> {
             mAllAssessments = mAssessmentDAO.getAllAssessments();
@@ -120,22 +80,107 @@ public class Repository {
         return mAllAssessments;
     }
 
-    public void delete(Assessment assessments) {
+    public void insert(Term term) {
         databaseExecutor.execute(() -> {
-            mAssessmentDAO.delete(assessments);
+            mTermDAO.insert(term);
         });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void insert(Classes classes) {
+        databaseExecutor.execute(() -> {
+            Log.d("Repository", "Inserting class with termID: " + classes.getTermID());
+            mClassesDAO.insert(classes);;
+
+        });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void insert(Assessment assessments) {
         databaseExecutor.execute(() -> {
             mAssessmentDAO.insert(assessments);
         });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void update(Term term) {
+        databaseExecutor.execute(() -> {
+            mTermDAO.update(term);
+        });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void update(Classes classes) {
+        databaseExecutor.execute(() -> {
+            Log.d("Repository", "Updating class with termID: " + classes.getTermID());
+            mClassesDAO.update(classes);
+        });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void update(Assessment assessments) {
         databaseExecutor.execute(() -> {
             mAssessmentDAO.update(assessments);
         });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
+
+    public void delete(Term term) {
+        databaseExecutor.execute(() -> {
+            mTermDAO.delete(term);
+        });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void delete(Classes classes) {
+        databaseExecutor.execute(() -> {
+            mClassesDAO.delete(classes);
+        });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void delete(Assessment assessments) {
+        databaseExecutor.execute(() -> {
+            mAssessmentDAO.delete(assessments);
+        });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 }

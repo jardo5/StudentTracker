@@ -10,6 +10,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -167,6 +168,10 @@ public class TermDetails extends AppCompatActivity {
         for (Classes c : repo.getAllClasses()) {
             if (c.getTermID() == termID) filteredClasses.add(c);
         }
+        //Debug
+        //TODO: Remove
+        Log.d("TermDetails", "Retrieved " + filteredClasses.size() + " classes for term " + termID);
+
 
         classAdapter.setClasses(filteredClasses);
     }
