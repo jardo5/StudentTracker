@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/assessmentDelete"
+        android:title="@string/delete_assessment" />
+    <item
+        android:id="@+id/assessmentStart"
+        android:title="@string/notifcation_start" />
+    <item
+        android:id="@+id/assessmentEnd"
+        android:title="@string/notifcation_end" />
+</menu>

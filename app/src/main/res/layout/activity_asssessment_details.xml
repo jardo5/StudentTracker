@@ -29,7 +29,7 @@
                     android:padding="10dp"/>
 
                 <EditText
-                    android:id="@+id/assessmentTitleEditText"
+                    android:id="@+id/assessmentTitle"
                     android:layout_width="150dp"
                     android:layout_marginHorizontal="5dp"
                     android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
                     android:padding="10dp"/>
 
                 <Spinner
-                    android:id="@+id/assessmentTypeSpinner"
+                    android:id="@+id/assessmentSpinner"
                     android:layout_width="150dp"
                     android:layout_marginHorizontal="5dp"
                     android:layout_height="wrap_content"
