@@ -127,19 +127,16 @@ public class AssessmentDetails extends AppCompatActivity {
         }
 
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                assessmentStartDate = startDateButton.getText().toString();
-                assessmentEndDate = endDateButton.getText().toString();
-                assessmentSpinner = spinner.getSelectedItem().toString();
-                if (assessmentID < 0) {
-                    assessment = new Assessment(0, editTitle.getText().toString(), assessmentName, assessmentStartDate, assessmentEndDate, classID);
-                    repo.insert(assessment);
-                } else {
-                    assessment = new Assessment(assessmentID, editTitle.getText().toString(), assessmentName, assessmentStartDate, assessmentEndDate, classID);
-                    repo.update(assessment);
-                }
+        saveButton.setOnClickListener(view -> {
+            assessmentStartDate = startDateButton.getText().toString();
+            assessmentEndDate = endDateButton.getText().toString();
+            assessmentSpinner = spinner.getSelectedItem().toString();
+            if (assessmentID < 0) {
+                assessment = new Assessment(0, editTitle.getText().toString(), assessmentName, assessmentStartDate, assessmentEndDate, classID);
+                repo.insert(assessment);
+            } else {
+                assessment = new Assessment(assessmentID, editTitle.getText().toString(), assessmentName, assessmentStartDate, assessmentEndDate, classID);
+                repo.update(assessment);
             }
         });
 
@@ -155,7 +152,7 @@ public class AssessmentDetails extends AppCompatActivity {
         super.onResume();
     }
 
-    public boolean onOptionsItemsSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item){
         int itemID = item.getItemId();
         if(itemID == android.R.id.home){
             this.finish();

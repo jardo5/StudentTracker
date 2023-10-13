@@ -33,9 +33,9 @@ import java.util.Locale;
 
 public class TermDetails extends AppCompatActivity {
 
-    EditText termTitle;
+    EditText editTitle;
 
-    String termTitleString;
+    String termTitle;
 
     int termID;
 
@@ -66,13 +66,13 @@ public class TermDetails extends AppCompatActivity {
         rV.setAdapter(classAdapter);
         rV.setLayoutManager(new LinearLayoutManager(this));
 
-        termTitle = findViewById(R.id.editTermName);
-        termTitleString = getIntent().getStringExtra("termTitle");
-        termTitle.setText(termTitleString);
-        termID = getIntent().getIntExtra("termID", -1);
+        editTitle = findViewById(R.id.editTermName);
+        termTitle = getIntent().getStringExtra("title");
+        editTitle.setText(termTitle);
+        termID = getIntent().getIntExtra("id", -1);
         repo = new Repository(getApplication());
-        termStartDate = getIntent().getStringExtra("termStartDate");
-        termEndDate = getIntent().getStringExtra("termEndDate");
+        termStartDate = getIntent().getStringExtra("start date");
+        termEndDate = getIntent().getStringExtra("end date");
 
         // For Retrieving Start & End Dates
         Button button = findViewById(R.id.termSaveButton);
@@ -134,7 +134,7 @@ public class TermDetails extends AppCompatActivity {
         button.setOnClickListener(v -> {
             termStartDate = startDate.getText().toString();
             termEndDate = endDate.getText().toString();
-            String title = termTitle.getText().toString();
+            String title = editTitle.getText().toString();
 
             if (termID < 0) {
                 term = new Term(0, title, termStartDate, termEndDate);

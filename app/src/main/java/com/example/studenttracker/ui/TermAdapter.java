@@ -21,18 +21,15 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
         private TermViewHolder(View itemview){
             super(itemview);
             termItemView=itemview.findViewById(R.id.termNameTextView);
-            itemview.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position=getAdapterPosition();
-                    final Term currentTerm=mTerm.get(position);
-                    Intent intent = new Intent(context, TermDetails.class);
-                    intent.putExtra("id",currentTerm.getTermID());
-                    intent.putExtra("title", currentTerm.getTermTitle());
-                    intent.putExtra("start date", currentTerm.getTermStart());
-                    intent.putExtra("end date", currentTerm.getTermEnd());
-                    context.startActivity(intent);
-                }
+            itemview.setOnClickListener(v -> {
+                int position=getAdapterPosition();
+                final Term currentTerm=mTerm.get(position);
+                Intent intent = new Intent(context, TermDetails.class);
+                intent.putExtra("id",currentTerm.getTermID());
+                intent.putExtra("title", currentTerm.getTermTitle());
+                intent.putExtra("start date", currentTerm.getTermStart());
+                intent.putExtra("end date", currentTerm.getTermEnd());
+                context.startActivity(intent);
             });
         }
     }

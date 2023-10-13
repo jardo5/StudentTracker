@@ -38,12 +38,9 @@ public class TermList extends AppCompatActivity {
 
         //Advance to Term Details
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(TermList.this, TermDetails.class);
-                startActivity(intent);
-            }
+        fab.setOnClickListener(view -> {
+            Intent intent = new Intent(TermList.this, TermDetails.class);
+            startActivity(intent);
         });
 
 
