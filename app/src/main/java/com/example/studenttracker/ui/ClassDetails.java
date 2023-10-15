@@ -61,7 +61,7 @@ public class ClassDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //TODO DELETE THIS
-        Log.d("DEBUG", "ClassDetails On CReate");
+        Log.d("DEBUG", "ClassDetails On Create");
 
 
         super.onCreate(savedInstanceState);

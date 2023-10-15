@@ -3,7 +3,7 @@
     <string name="delete_term">Delete Term</string>
     <string name="progress_spinner">ProgressSpinner</string>
     <string name="delete_class">Delete Class</string>
-    <string name="notify_start">\n</string>
+    <string name="notify_start">Notify Start</string>
     <string name="notify_end">Notify End</string>
     <string name="share">Share</string>
     <string name="channel_name">Notifications</string>
