@@ -14,7 +14,7 @@ import com.example.studenttracker.entities.Term;
 
 
 //Increment the version number to force a database reset
-@androidx.room.Database(entities = {Term.class, Classes.class, Assessment.class}, version = 3, exportSchema = false)
+@androidx.room.Database(entities = {Term.class, Classes.class, Assessment.class}, version = 4, exportSchema = false)
 public abstract class DatabaseBuilder extends RoomDatabase {
     public abstract TermDAO termDAO();
 

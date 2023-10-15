@@ -34,7 +34,7 @@ public class AssessmentDetails extends AppCompatActivity {
     String assessmentName;
     String assessmentStartDate;
     String assessmentEndDate;
-    String assessmentSpinner;
+    String assessmentType;
 
     DatePickerDialog.OnDateSetListener assessmentDateStart;
     DatePickerDialog.OnDateSetListener assessmentDateEnd;
@@ -60,7 +60,7 @@ public class AssessmentDetails extends AppCompatActivity {
         editTitle.setText(assessmentName);
         assessmentStartDate = getIntent().getStringExtra("assessmentStartDate");
         assessmentEndDate = getIntent().getStringExtra("assessmentEndDate");
-        assessmentSpinner = getIntent().getStringExtra("assessmentSpinner");
+        assessmentType = getIntent().getStringExtra("assessmentSpinner");
         classID = getIntent().getIntExtra("classID", -1);
         assessmentID = getIntent().getIntExtra("assessmentID", -1);
 
@@ -80,7 +80,12 @@ public class AssessmentDetails extends AppCompatActivity {
 
         startDateButton.setOnClickListener(view -> {
             try {
-                Date date = DateUtil.convertStringToDate(assessmentStartDate);
+                Date date;
+                if (assessmentStartDate != null && !assessmentStartDate.isEmpty()) {
+                    date = DateUtil.convertStringToDate(assessmentStartDate);
+                } else {
+                    date = new Date(); // default to today fixes crash
+                }
                 currentCalendar.setTime(date);
             } catch (ParseException e) {
                 throw new RuntimeException(e);
@@ -88,14 +93,22 @@ public class AssessmentDetails extends AppCompatActivity {
             new DatePickerDialog(AssessmentDetails.this, assessmentDateStart, currentCalendar.get(Calendar.YEAR), currentCalendar.get(Calendar.MONTH), currentCalendar.get(Calendar.DAY_OF_MONTH)).show();
         });
 
+
         endDateButton.setOnClickListener(view -> {
             try {
-                Date date = DateUtil.convertStringToDate(assessmentEndDate);
+                Date date;
+                if (assessmentEndDate != null && !assessmentEndDate.isEmpty()) {
+                    date = DateUtil.convertStringToDate(assessmentEndDate);
+                } else {
+                    date = new Date();
+                }
                 currentCalendar2.setTime(date);
             } catch (ParseException e) {
                 throw new RuntimeException(e);
             }
+            new DatePickerDialog(AssessmentDetails.this, assessmentDateEnd, currentCalendar2.get(Calendar.YEAR), currentCalendar2.get(Calendar.MONTH), currentCalendar2.get(Calendar.DAY_OF_MONTH)).show();
         });
+
 
         assessmentDateStart = (datePicker, year, month, dayOfMonth) -> {
             currentCalendar.set(Calendar.YEAR, year);
@@ -116,11 +129,11 @@ public class AssessmentDetails extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinner.setAdapter(adapter);
 
-        if (assessmentSpinner == null) {
+        if (assessmentType == null) {
             spinner.setSelection(0);
-        } else if (assessmentSpinner.equals("Objective")) {
+        } else if (assessmentType.equals("Objective")) {
             spinner.setSelection(0);
-        } else if (assessmentSpinner.equals("Performance")) {
+        } else if (assessmentType.equals("Performance")) {
             spinner.setSelection(1);
         } else {
             return;
@@ -130,12 +143,12 @@ public class AssessmentDetails extends AppCompatActivity {
         saveButton.setOnClickListener(view -> {
             assessmentStartDate = startDateButton.getText().toString();
             assessmentEndDate = endDateButton.getText().toString();
-            assessmentSpinner = spinner.getSelectedItem().toString();
+            assessmentType = spinner.getSelectedItem().toString();
             if (assessmentID < 0) {
-                assessment = new Assessment(0, editTitle.getText().toString(), assessmentName, assessmentStartDate, assessmentEndDate, classID);
+                assessment = new Assessment(0, editTitle.getText().toString(), assessmentType, assessmentStartDate, assessmentEndDate, classID);
                 repo.insert(assessment);
             } else {
-                assessment = new Assessment(assessmentID, editTitle.getText().toString(), assessmentName, assessmentStartDate, assessmentEndDate, classID);
+                assessment = new Assessment(assessmentID, editTitle.getText().toString(), assessmentType, assessmentStartDate, assessmentEndDate, classID);
                 repo.update(assessment);
             }
         });
@@ -166,7 +179,7 @@ public class AssessmentDetails extends AppCompatActivity {
             }
             return true;
         } else if (itemID == R.id.assessmentStart) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy");
             Date date = null;
             try {
                 date = dateFormat.parse(assessmentStartDate);
@@ -181,7 +194,7 @@ public class AssessmentDetails extends AppCompatActivity {
             alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
             return true;
         } else if (itemID == R.id.assessmentEnd) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy");
             Date date = null;
             try {
                 date = dateFormat.parse(assessmentEndDate);
