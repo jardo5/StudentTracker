@@ -1,5 +1,6 @@
 package com.example.studenttracker.ui;
 
+import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -15,11 +16,13 @@ public class MainActivity extends AppCompatActivity {
 
     public static int alertCount;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button button = findViewById(R.id.button);
+
 
         // Test data array for terms
         Term[] terms = {
@@ -41,3 +44,4 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
+

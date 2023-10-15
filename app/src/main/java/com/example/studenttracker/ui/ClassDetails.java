@@ -98,7 +98,7 @@ public class ClassDetails extends AppCompatActivity {
 
         classID = getIntent().getIntExtra("classID", -1);
         termID = getIntent().getIntExtra("termID", -1);
-        Log.d("ClassDetails", "Received termID: " + termID);
+        Log.d("ClassDetails CHECK AAAAAAAAA", "Received termID: " + termID);
 
 
 
@@ -205,7 +205,6 @@ public class ClassDetails extends AppCompatActivity {
             classStatus = spinner.getSelectedItem().toString();
 
             classes = new Classes(classID < 0 ? 0 : classID, title, classStart, classEnd, classStatus, profName, profPhone, profEmail, termID, note);
-            Log.d("ClassDetails", "Using termID: " + termID + " when saving class");
             if (classID < 0) {
                 repo.insert(classes);
             } else {

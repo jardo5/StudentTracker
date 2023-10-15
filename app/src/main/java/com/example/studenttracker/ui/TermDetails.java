@@ -168,11 +168,6 @@ public class TermDetails extends AppCompatActivity {
         for (Classes c : repo.getAllClasses()) {
             if (c.getTermID() == termID) filteredClasses.add(c);
         }
-        //Debug
-        //TODO: Remove
-        Log.d("TermDetails", "Retrieved " + filteredClasses.size() + " classes for term " + termID);
-
-
         classAdapter.setClasses(filteredClasses);
     }
 

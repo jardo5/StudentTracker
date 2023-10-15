@@ -12,7 +12,9 @@ import com.example.studenttracker.entities.Assessment;
 import com.example.studenttracker.entities.Classes;
 import com.example.studenttracker.entities.Term;
 
-@androidx.room.Database(entities = {Term.class, Classes.class, Assessment.class}, version = 2, exportSchema = false)
+//TODO FIGURE OUT WHY THIS ISN'T WORKING WHY ALL TERMID IS -1 when setting a class
+//Increment the version number to force a database reset
+@androidx.room.Database(entities = {Term.class, Classes.class, Assessment.class}, version = 3, exportSchema = false)
 public abstract class DatabaseBuilder extends RoomDatabase {
     public abstract TermDAO termDAO();
 

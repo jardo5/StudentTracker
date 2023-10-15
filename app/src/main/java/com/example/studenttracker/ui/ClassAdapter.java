@@ -40,8 +40,6 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
                     intent.putExtra("classProfEmail", currentClass.getClassInstructorEmail());
                     intent.putExtra("notes", currentClass.getClassNotes());
                     intent.putExtra("termID", currentClass.getTermID());
-                    //TODO: REMOVE DEBUG
-                    Log.d("ClassAdapter", "Sending termID: " + currentClass.getTermID() + " to ClassDetails");
                     intent.putExtra("classStatus", currentClass.getClassProgress());
                     context.startActivity(intent);
                 }
