@@ -27,6 +27,8 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    //TODO DELETE THIS
+                    Log.d("DEBUG", "ClassAdapter: onClick: " + getAdapterPosition());
                     int classPosition = getAdapterPosition();
                     final Classes currentClass = mClasses.get(classPosition);
                     Intent intent = new Intent(context, ClassDetails.class);
@@ -39,7 +41,15 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
                     intent.putExtra("classProfPhone", currentClass.getClassInstructorPhone());
                     intent.putExtra("classProfEmail", currentClass.getClassInstructorEmail());
                     intent.putExtra("notes", currentClass.getClassNotes());
-                    intent.putExtra("termID", currentClass.getTermID());
+
+                    //Send termID to ClassDetails
+                    //TODO DELETE THIS
+                    int termIdToSend = currentClass.getTermID();
+                    Log.d("DEBUG", "Sending termID: " + termIdToSend);
+                    intent.putExtra("termID", termIdToSend);
+
+                    //TODO REVERT THIS
+                    //intent.putExtra("termID", currentClass.getTermID());
                     intent.putExtra("classStatus", currentClass.getClassProgress());
                     context.startActivity(intent);
                 }
@@ -47,7 +57,14 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
         }
     }
 
+    @NonNull
+    @Override
+    public ClassAdapter.ClassViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View classItemView = mInflater.inflate(R.layout.class_list_item, parent, false);
+        return new ClassViewHolder(classItemView);
+    }
 
+    private List<Classes> mClasses;
     private final Context context;
 
     private final LayoutInflater mInflater;
@@ -55,16 +72,6 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
     public ClassAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
         this.context = context;
-    }
-
-    private List<Classes> mClasses;
-
-
-    @NonNull
-    @Override
-    public ClassAdapter.ClassViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View classItemView = mInflater.inflate(R.layout.class_list_item, parent, false);
-        return new ClassViewHolder(classItemView);
     }
 
     @Override

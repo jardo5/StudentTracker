@@ -13,20 +13,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudentTracker"
         tools:targetApi="31">
-        <activity
-            android:name=".ui.ClassDetails"
-            android:exported="false"
-            android:label="Classes and Assessments"
-            android:parentActivityName=".ui.TermDetails" />
+        <receiver
+            android:name=".ui.NotifcationReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+
         <activity
             android:name=".ui.AssessmentDetails"
             android:exported="false"
             android:label="Assessment Details"
             android:parentActivityName=".ui.ClassDetails" />
         <activity
+            android:name=".ui.ClassDetails"
+            android:exported="false"
+            android:label="Class Details and Assessments"
+            android:parentActivityName=".ui.TermDetails" />
+        <activity
             android:name=".ui.TermDetails"
             android:exported="false"
-            android:label="Term Details and Class List"
+            android:label="Term Details and Classes"
             android:parentActivityName=".ui.TermList" />
         <activity
             android:name=".ui.TermList"

@@ -97,11 +97,12 @@ public class TermDetails extends AppCompatActivity {
         endDate.setText(termID < 0 ? currentDate : termEndDate);
 
         startDate.setOnClickListener(view -> {
-            String stringFromButton = endDate.getText().toString();
+            String stringFromButton = startDate.getText().toString();
             try {
                 Date date = DateUtil.convertStringToDate(stringFromButton);
                 currentCalendar2.setTime(date);
             } catch (ParseException e) {
+                Log.e("DEBUG", "Invalid date format", e);
                 throw new RuntimeException(e);
             }
             new DatePickerDialog(TermDetails.this, termDates, currentCalendar2.get(Calendar.YEAR), currentCalendar2.get(Calendar.MONTH), currentCalendar2.get(Calendar.DAY_OF_MONTH)).show();
@@ -113,6 +114,7 @@ public class TermDetails extends AppCompatActivity {
                 Date date = DateUtil.convertStringToDate(stringFromButton);
                 currentCalendar2.setTime(date);
             } catch (ParseException e) {
+                Log.e("DEBUG", "Invalid date format", e);
                 throw new RuntimeException(e);
             }
             new DatePickerDialog(TermDetails.this, termDatesEnd, currentCalendar2.get(Calendar.YEAR), currentCalendar2.get(Calendar.MONTH), currentCalendar2.get(Calendar.DAY_OF_MONTH)).show();
@@ -152,6 +154,7 @@ public class TermDetails extends AppCompatActivity {
         FloatingActionButton fab = findViewById(R.id.floatingActionButton2);
         fab.setOnClickListener(view -> {
             Intent intent = new Intent(TermDetails.this, ClassDetails.class);
+            intent.putExtra("termID", termID);
             startActivity(intent);
         });
     }

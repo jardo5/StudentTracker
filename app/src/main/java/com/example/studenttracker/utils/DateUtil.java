@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class DateUtil {
-    private static final String DATE_FORMAT = "MM/dd/yyyy";
+    private static final String DATE_FORMAT = "MM/dd/yy";
 
     public static String getCurrentFormattedDate() {
         SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT, Locale.US);

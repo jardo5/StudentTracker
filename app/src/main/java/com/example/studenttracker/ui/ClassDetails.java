@@ -60,6 +60,10 @@ public class ClassDetails extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //TODO DELETE THIS
+        Log.d("DEBUG", "ClassDetails On CReate");
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_details);
         RecyclerView rV = findViewById(R.id.termRecyclerView);
@@ -98,8 +102,8 @@ public class ClassDetails extends AppCompatActivity {
 
         classID = getIntent().getIntExtra("classID", -1);
         termID = getIntent().getIntExtra("termID", -1);
-        Log.d("ClassDetails CHECK AAAAAAAAA", "Received termID: " + termID);
-
+        //TODO DELETE THIS
+        Log.d("DEBUG", "Received termID: " + termID);
 
 
         FloatingActionButton fab = findViewById(R.id.floatingActionButton2);
@@ -212,8 +216,9 @@ public class ClassDetails extends AppCompatActivity {
             }
         });
     }
+
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         RecyclerView rV = findViewById(R.id.termRecyclerView);
         final AssessmentAdapter aD = new AssessmentAdapter(this);
@@ -231,7 +236,7 @@ public class ClassDetails extends AppCompatActivity {
         return true;
     }
 
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         int itemID = item.getItemId();
 
         if (itemID == android.R.id.home) {
