@@ -124,7 +124,7 @@ public class AssessmentDetails extends AppCompatActivity {
             endDateButton.setText(convertDateToString(currentCalendar2.getTime()));
         };
 
-        Spinner spinner = (Spinner) findViewById(R.id.assessmentSpinner);
+        Spinner spinner = findViewById(R.id.assessmentSpinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.assessment_types, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinner.setAdapter(adapter);
